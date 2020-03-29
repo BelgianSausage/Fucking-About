@@ -21,6 +21,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class setDataController {
 
 	ObservableList <String> hours = FXCollections.observableArrayList("00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23");
@@ -31,6 +35,13 @@ public class setDataController {
 	boolean first = true;
 	String hour = "00";
 	String minute = "00";
+	dataPoint Dp;
+	String start;
+	String end;
+	DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+	Date date = new Date();
+
+	{ Dp = new dataPoint(); }
 
 	@FXML
 	private TextField nameField;
@@ -98,7 +109,22 @@ public class setDataController {
 
 	@FXML
 	void setActivity(ActionEvent event) {
+		boolean completeEdit = checkForInformationManual();
+		if(completeEdit) {
+			start = hourStartManualDropdown.getValue() + ":" + minuteStartManualDropdown.getValue();
+			end = hourEndManualDropdown.getValue() + ":" + minuteEndManualDropdown.getValue();
+			Dp.addDataPoint(nameFieldManual.getText(), format.format(date), start, end);
+		}
+	}
 
+	boolean checkForInformationManual(){
+		if(!nameFieldManual.getText().equals("") && !hourStartManualDropdown.getSelectionModel().isEmpty() && !minuteStartManualDropdown.getSelectionModel().isEmpty() &&
+				!hourEndManualDropdown.getSelectionModel().isEmpty() && !minuteEndManualDropdown.getSelectionModel().isEmpty()){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	@FXML
@@ -106,6 +132,8 @@ public class setDataController {
 		boolean canStart = checkForInformation();
 		if(canStart){
 			if(startButton.getText().equals("Start")){
+				start = hourTimerDropdown.getValue() + ":" + minuteDropdown.getValue();
+				System.out.println(start);
 				startButton.setText("Stop");
 				nameField.setEditable(false);
 				hourTimerDropdown.setDisable(true);
@@ -113,6 +141,8 @@ public class setDataController {
 				timer(true);
 			}
 			else{
+				end = hour + ":" + minute;
+				Dp.addDataPoint(nameField.getText(), format.format(date), start, end);
 				startButton.setText("Start");
 				nameField.setEditable(true);
 				hourTimerDropdown.setDisable(false);
