@@ -130,7 +130,7 @@ public class setDataController {
 		if(completeEdit) {
 			start = hourStartManualDropdown.getValue() + ":" + minuteStartManualDropdown.getValue();
 			end = hourEndManualDropdown.getValue() + ":" + minuteEndManualDropdown.getValue();
-			Dp.addDataPoint(nameFieldManual.getText(), format.format(date), start, end);
+			Dp.manualDurationCalc(nameFieldManual.getText(), format.format(date), start, end);
 		}
 	}
 
@@ -150,7 +150,6 @@ public class setDataController {
 		if(canStart){
 			if(startButton.getText().equals("Start")){
 				start = hourTimerDropdown.getValue() + ":" + minuteDropdown.getValue();
-				System.out.println(start);
 				startButton.setText("Stop");
 				nameField.setEditable(false);
 				hourTimerDropdown.setDisable(true);
@@ -207,11 +206,10 @@ public class setDataController {
 			timeline.pause();
 			first = false;
 		}
-
 	}
 	
 	void readGoals() {
-		try {
+		try{
 			FileReader fr = new FileReader("Goals.txt");
 			BufferedReader br = new BufferedReader(fr);
 			goalCount = 0;

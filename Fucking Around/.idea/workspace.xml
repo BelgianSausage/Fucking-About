@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5ff70fc-a234-45ee-9f11-e6b4adbf8033" name="Default Changelist" comment="" />
+    <list default="true" id="b5ff70fc-a234-45ee-9f11-e6b4adbf8033" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RawData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RawData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FuckingAround/FuckingAround/setData/dataPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FuckingAround/FuckingAround/setData/dataPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FuckingAround/FuckingAround/setData/setDataController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FuckingAround/FuckingAround/setData/setDataController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FuckingAround/FuckingAround/setData/setDataController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FuckingAround/FuckingAround/setData/setDataController.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +22,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1Yz0BMYEgWXMnzZeqgRITR7p4Vw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -83,26 +91,26 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1585307331284">
+    <state width="938" height="284" key="GridCell.Tab.0.bottom" timestamp="1586967600815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1583931904675" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1585307331284" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1585307331283">
+    <state width="938" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1586967600815" />
+    <state width="938" height="284" key="GridCell.Tab.0.center" timestamp="1586967600815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1583931904675" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1585307331283" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1585307331283">
+    <state width="938" height="284" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1586967600815" />
+    <state width="938" height="284" key="GridCell.Tab.0.left" timestamp="1586967600815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1583931904675" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1585307331283" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1585307331283">
+    <state width="938" height="284" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1586967600815" />
+    <state width="938" height="284" key="GridCell.Tab.0.right" timestamp="1586967600815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1583931904675" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1585307331283" />
+    <state width="938" height="284" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1586967600815" />
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1585300303137">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
