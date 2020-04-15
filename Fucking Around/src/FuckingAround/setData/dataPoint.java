@@ -41,6 +41,8 @@ public class dataPoint {
                     break;
                 }
             }
+            br.close();
+            fr.close();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

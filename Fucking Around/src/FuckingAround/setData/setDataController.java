@@ -21,6 +21,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,6 +33,7 @@ public class setDataController {
 
 	ObservableList <String> hours = FXCollections.observableArrayList("00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23");
 	ObservableList <String> minutes = FXCollections.observableArrayList("00","10","20","30","40","50");
+	ObservableList <String> goalNames = FXCollections.observableArrayList();
 	private Timeline timeline;
 	private DoubleProperty timeSeconds = new SimpleDoubleProperty(), splitTimeSeconds = new SimpleDoubleProperty();
 	private Duration time = Duration.ZERO, splitTime = Duration.ZERO;
@@ -40,6 +45,8 @@ public class setDataController {
 	String end;
 	DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 	Date date = new Date();
+	int goalCount;
+	String [][] goals = new String [50][5];
 
 	{ Dp = new dataPoint(); }
 
@@ -81,6 +88,12 @@ public class setDataController {
 
 	@FXML
 	private ComboBox<String> minuteEndManualDropdown;
+	
+	@FXML
+	private ComboBox<String> goalDropdown;
+	
+	@FXML
+	private ComboBox<String> goalDropdownManual;
 
 	@FXML
 	void initialize(){
@@ -91,6 +104,10 @@ public class setDataController {
 		minuteDropdown.setItems(minutes);
 		minuteStartManualDropdown.setItems(minutes);
 		minuteEndManualDropdown.setItems(minutes);
+		readGoals();
+		insertGoalNames();
+		goalDropdown.setItems(goalNames);
+		goalDropdownManual.setItems(goalNames);
 	}
 
 	@FXML
@@ -191,6 +208,39 @@ public class setDataController {
 			first = false;
 		}
 
+	}
+	
+	void readGoals() {
+		try {
+			FileReader fr = new FileReader("Goals.txt");
+			BufferedReader br = new BufferedReader(fr);
+			goalCount = 0;
+			for(int i = 0; i < 50; i++){
+				String str = br.readLine();
+				if(str != null){
+					goalCount++;
+				}
+				else{
+					break;
+				}
+				String [] splitArray = str.split(",");
+				for(int j = 0; j < 5; j++){
+					goals[i][j] = splitArray[j];
+				}
+			}
+			br.close();
+			fr.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	void insertGoalNames() {
+		for(int i = 0; i < goalCount; i++){
+			goalNames.add(goals[i][0]);
+		}
 	}
 
 	void decideTime(){

@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class editGoalsController {
+public class editGoalsController extends goalsManagerController{
 
 	int goalTimescope = 2; //Whether the goal is to be daily or weekly
 	int goalCount = 0;
@@ -84,6 +84,25 @@ public class editGoalsController {
     	goalTimescope = 1;
     }
 
+    @FXML
+	void initialize(){
+    	readGoals();
+		goalNameField.setText(goals[goalSelected][0]);
+		goalDescriptionField.setText(goals[goalSelected][1]);
+		goalRewardField.setText(goals[goalSelected][2]);
+		if(goals[goalSelected][3].equals("0")) {
+			weeklyCheckbox.setSelected(true);
+			dailyCheckbox.setSelected(false);
+			goalTimescope = 1;
+		}
+		else {
+			dailyCheckbox.setSelected(true);
+			weeklyCheckbox.setSelected(false);
+			goalTimescope = 0;
+		}
+		//Progression? 
+	}
+    
     boolean checkForInformation(){
     	if(!goalNameField.getText().equals("") && !goalDescriptionField.getText().equals("") && !goalRewardField.getText().equals("") && goalTimescope != 2){
     		return true;
