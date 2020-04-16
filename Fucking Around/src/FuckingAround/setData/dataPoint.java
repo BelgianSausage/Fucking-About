@@ -140,7 +140,26 @@ public class dataPoint {
         try {
             FileWriter fw = new FileWriter("sortedData.txt");
             for(int j = 0; j < manualDataCount; j++) {
-                fw.write("\n" + data[j].getActivity() + " " + data[j].getYear() + "/" + data[j].getMonth() + "/" + data[j].getDay() + " " + data[j].getHour() + ":" + data[j].getMinute() + " " +  data[j].getDuration());
+                String monthPad = "";
+                String dayPad = "";
+                String hourPad = "";
+                String minutePad = "";
+                if (data[j].getMonth()<10) {
+                    monthPad = "0";
+                }
+                if (data[j].getDay()<10) {
+                    dayPad = "0";
+                }
+                if (data[j].getHour()<10) {
+                    hourPad = "0";
+                }
+                if (data[j].getMinute()<10) {
+                    minutePad = "0";
+                }
+                if (j>0) {
+                    fw.write("\n");
+                }
+                fw.write(data[j].getActivity() + " " + data[j].getYear() + "/" + monthPad + data[j].getMonth() + "/" + dayPad + data[j].getDay() + " " + hourPad + data[j].getHour() + ":" + minutePad + data[j].getMinute() + " " +  data[j].getDuration());
             }
             fw.close();
         }

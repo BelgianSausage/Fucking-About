@@ -112,7 +112,7 @@ public class informaticsController {
 
     @FXML
     void week() {
-        LocalDate localDate = LocalDate.of(2020, Month.of(4), 15);
+        LocalDate localDate = LocalDate.of(Integer.parseInt(getDate(0).substring(0,4)), Integer.parseInt(getDate(0).substring(5,7)), Integer.parseInt(getDate(0).substring(8,10)));
         DayOfWeek dayOfWeek = DayOfWeek.from(localDate);
         XYChart.Series series = new XYChart.Series();
         weeklyBarChart.setLegendVisible(false);
@@ -157,7 +157,7 @@ public class informaticsController {
 
         int sum = 0;
         for (int i = 0; i < dayCount.length; i++) {
-            sum += dayCount[i];
+            sum += 1440 - dayCount[i];
         }
 
         series.getData().add(new XYChart.Data("Monday", 1440 - dayCount[0]));
@@ -286,7 +286,7 @@ public class informaticsController {
         }
 
         for (int i= (int) diff; i>-1; i--) {
-            series.getData().add(new XYChart.Data(Integer.toString(i), dayCount[i]));
+            series.getData().add(new XYChart.Data(Integer.toString(i), 1440 - dayCount[i]));
         }
 
         if (max > 1440) {
@@ -302,7 +302,7 @@ public class informaticsController {
 
     void getData() {
         try {
-            FileReader fr = new FileReader("RawData.txt");
+            FileReader fr = new FileReader("sortedData.txt");
             BufferedReader br = new BufferedReader(fr);
             activityCount = 0;
             for(int i = 0; i < 50; i++){
