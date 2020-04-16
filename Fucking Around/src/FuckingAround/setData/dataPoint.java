@@ -9,20 +9,15 @@ public class dataPoint {
         String[] begin = start.split(":");
         String[] End = end.split(":");
         int[] time = new int[2];
-        for(int timeCalc = 0; timeCalc < 2; timeCalc++){
-            if(timeCalc == 0) {
-                time[timeCalc] = Integer.parseInt(End[timeCalc]) - Integer.parseInt(begin[timeCalc]);
+        for(int startEnd = 0; startEnd < 2; startEnd++){
+            if(Integer.parseInt(End[startEnd]) < Integer.parseInt(begin[startEnd])){
+                time[startEnd] = (24 + Integer.parseInt(End[0])) - Integer.parseInt(begin[startEnd]);
             }
             else{
-                time[timeCalc] = Integer.parseInt(End[timeCalc]) - Integer.parseInt(begin[timeCalc]);
+                time[startEnd] = Integer.parseInt(End[startEnd]) - Integer.parseInt(begin[startEnd]);
             }
         }
-        if(time[0] < 0){
-            time[0] = time[0] * -1;
-        }
-        if(time[1] < 0){
-            time[1] = time[1] * -1;
-        }
+
         String hour;
         String minute;
         if(String.valueOf(time[0]).length() == 1){
