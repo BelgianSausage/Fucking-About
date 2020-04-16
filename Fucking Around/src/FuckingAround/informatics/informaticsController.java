@@ -86,7 +86,7 @@ public class informaticsController {
                 }
                 int diff = getDiff(activities[i][2], activities[i][3]);
 
-                series.getData().add(new XYChart.Data(activities[i][0], diff));
+                series.getData().add(new XYChart.Data(activities[i][0], 1440 - diff));
                 count += diff;
             }
         }
