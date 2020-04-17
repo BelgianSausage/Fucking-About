@@ -34,6 +34,10 @@ public class setDataController {
 	ObservableList <String> hours = FXCollections.observableArrayList("00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23");
 	ObservableList <String> minutes = FXCollections.observableArrayList("00","10","20","30","40","50");
 	ObservableList <String> goalNames = FXCollections.observableArrayList();
+	ObservableList <String> day = FXCollections.observableArrayList("01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31");
+	ObservableList <String> month = FXCollections.observableArrayList("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Nov","Oct","Dec");
+	ObservableList <String> year = FXCollections.observableArrayList("2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030");
+	
 	private Timeline timeline;
 	private DoubleProperty timeSeconds = new SimpleDoubleProperty(), splitTimeSeconds = new SimpleDoubleProperty();
 	private Duration time = Duration.ZERO, splitTime = Duration.ZERO;
@@ -94,7 +98,16 @@ public class setDataController {
 	
 	@FXML
 	private ComboBox<String> goalDropdownManual;
+	
+	@FXML
+	private ComboBox<String> dayDropdown;
+	
+	@FXML
+	private ComboBox<String> monthDropdown;
 
+	@FXML
+	private ComboBox<String> yearDropdown;
+	
 	@FXML
 	void initialize(){
 		//timerLabel.textProperty().bind(timeSeconds.asString());
@@ -108,6 +121,9 @@ public class setDataController {
 		insertGoalNames();
 		goalDropdown.setItems(goalNames);
 		goalDropdownManual.setItems(goalNames);
+		dayDropdown.setItems(day);
+		monthDropdown.setItems(month);
+		yearDropdown.setItems(year);
 	}
 
 	@FXML
@@ -119,8 +135,12 @@ public class setDataController {
 	void resetActivity(ActionEvent event) {
 		hourStartManualDropdown.setValue("Hour");
 		hourEndManualDropdown.setValue("Hour");
-		minuteStartManualDropdown.setValue("Minute");
-		minuteEndManualDropdown.setValue("Minute");
+		minuteStartManualDropdown.setValue("Min");
+		minuteEndManualDropdown.setValue("Min");
+		goalDropdown.setValue("Goal");
+		dayDropdown.setValue("Day");
+		monthDropdown.setValue("Month");
+		yearDropdown.setValue("Year");
 		nameFieldManual.clear();
 	}
 
@@ -128,6 +148,7 @@ public class setDataController {
 	void setActivity(ActionEvent event) {
 		boolean completeEdit = checkForInformationManual();
 		if(completeEdit) {
+			System.out.println("OK");
 			start = hourStartManualDropdown.getValue() + ":" + minuteStartManualDropdown.getValue();
 			end = hourEndManualDropdown.getValue() + ":" + minuteEndManualDropdown.getValue();
 			Dp.manualDurationCalc(nameFieldManual.getText(), format.format(date), start, end);
@@ -267,7 +288,8 @@ public class setDataController {
 	}
 
 	boolean checkForInformation(){
-		if(!hourTimerDropdown.getSelectionModel().isEmpty() && !minuteDropdown.getSelectionModel().isEmpty() && !nameField.getText().equals("")){
+		if(!hourTimerDropdown.getSelectionModel().isEmpty() && !minuteDropdown.getSelectionModel().isEmpty() && !nameField.getText().equals("") && !dayDropdown.getSelectionModel().isEmpty() && !monthDropdown.getSelectionModel().isEmpty() && !yearDropdown.getSelectionModel().isEmpty()){
+			
 			return true;
 		}
 		else{
@@ -280,7 +302,7 @@ public class setDataController {
 		popup.initModality(Modality.APPLICATION_MODAL);
 		popup.setTitle("Not Enough Information");
 		Label label = new Label();
-		label.setText("Not enough information was supplied to start the activity timer. \n Please make sure all 3 values are supplied before pressing the \n Start button.");
+		label.setText("Not enough information was supplied to start the activity timer. \n Please make sure all values are supplied before pressing the \n Start button.");
 		Button closeButton = new Button("Understood!");
 		closeButton.setOnAction(z -> popup.close());
 		VBox layout = new VBox(10);

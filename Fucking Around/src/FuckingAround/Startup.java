@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Startup extends Application{
-
 	private static Startup fuckingAround;
 	protected static Stage primaryStage;
 	private AnchorPane mainLayout;
