@@ -86,7 +86,7 @@ public class informaticsController {
                 }
                 int diff = getDiff(activities[i][2], activities[i][3]);
 
-                series.getData().add(new XYChart.Data(activities[i][0], 1440 - diff));
+                series.getData().add(new XYChart.Data(activities[i][0], diff));
                 count += diff;
             }
         }
@@ -121,7 +121,7 @@ public class informaticsController {
         for (int j = dayOfWeek.getValue(); j > 0; j--) {
             boolean manualSleep = false;
             for (int i = 0; i < activityCount; i++) {
-                if (activities[i][1].equals(getDate(dayOfWeek.getValue() - j))) {
+                if (activities[i][1].equals(getDate(dayOfWeek.getValue()-j))) {
                     if (activities[i][0].equals("Sleep")) {
                         manualSleep = true;
                     }
@@ -137,7 +137,7 @@ public class informaticsController {
                 if (dayCount[j-1] + 480 > 1440) {
                     dayCount[j-1] = 1440;
                 } else {
-                    dayCount[j-1] += 480;
+                    dayCount[j - 1] += 480;
                 }
             }
         }
@@ -161,6 +161,7 @@ public class informaticsController {
             sum += 1440 - dayCount[i];
         }
 
+        //System.out.println(1440-dayCount[0]);
         series.getData().add(new XYChart.Data("Monday", 1440 - dayCount[0]));
 
         if (dayOfWeek.getValue() > 1) {
@@ -335,8 +336,8 @@ public class informaticsController {
         int m1 = Integer.parseInt(time1.substring(3,5));
         int h2 = Integer.parseInt(time2.substring(0,2));
         int m2 = Integer.parseInt(time2.substring(3,5));
-
-        if (h2 > h1) {
+        return h2 * 60 + m2;
+        /*if (h2 > h1) {
             return (h2 - h1) * 60 + m2 - m1;
         } else if (h1 > h2) {
             return (24 + h2 - h1) * 60 + m2 - m1;
@@ -348,7 +349,7 @@ public class informaticsController {
             } else {
                 return 0;
             }
-        }
+        }*/
     }
 
     String getDate(int days) {
