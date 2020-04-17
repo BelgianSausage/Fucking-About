@@ -198,8 +198,7 @@ public class setDataController {
 	}
 
 	boolean checkForInformationManual(){
-		if(!nameFieldManual.getText().equals("") && !hourStartManualDropdown.getSelectionModel().isEmpty() && !minuteStartManualDropdown.getSelectionModel().isEmpty() &&
-				!hourEndManualDropdown.getSelectionModel().isEmpty() && !minuteEndManualDropdown.getSelectionModel().isEmpty()){
+		if(!nameFieldManual.getText().equals("") && !hourStartManualDropdown.getSelectionModel().isEmpty() && !minuteStartManualDropdown.getSelectionModel().isEmpty() && !hourEndManualDropdown.getSelectionModel().isEmpty() && !minuteEndManualDropdown.getSelectionModel().isEmpty()  && !dayDropdown.getSelectionModel().isEmpty() && !monthDropdown.getSelectionModel().isEmpty() && !yearDropdown.getSelectionModel().isEmpty()){
 			return true;
 		}
 		else{
@@ -330,7 +329,7 @@ public class setDataController {
 	}
 
 	boolean checkForInformation(){
-		if(!hourTimerDropdown.getSelectionModel().isEmpty() && !minuteDropdown.getSelectionModel().isEmpty() && !nameField.getText().equals("") && !dayDropdown.getSelectionModel().isEmpty() && !monthDropdown.getSelectionModel().isEmpty() && !yearDropdown.getSelectionModel().isEmpty()){
+		if(!hourTimerDropdown.getSelectionModel().isEmpty() && !minuteDropdown.getSelectionModel().isEmpty() && !nameField.getText().equals("")){
 			
 			return true;
 		}
