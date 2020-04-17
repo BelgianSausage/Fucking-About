@@ -151,7 +151,49 @@ public class setDataController {
 			System.out.println("OK");
 			start = hourStartManualDropdown.getValue() + ":" + minuteStartManualDropdown.getValue();
 			end = hourEndManualDropdown.getValue() + ":" + minuteEndManualDropdown.getValue();
-			Dp.manualDurationCalc(nameFieldManual.getText(), format.format(date), start, end);
+			String Mon = monthDropdown.getValue();
+			String month = monthNumberer(Mon);
+			String customDate = yearDropdown.getValue() + "/" + month + "/" + dayDropdown.getValue();
+			Dp.manualDurationCalc(nameFieldManual.getText(), customDate, start, end);
+		}
+	}
+
+	public String monthNumberer(String month){
+		if(month == "Jan"){
+			return "01";
+		}
+		else if(month == "Feb"){
+			return "02";
+		}
+		else if(month == "Mar"){
+			return "03";
+		}
+		else if(month == "Apr"){
+			return "04";
+		}
+		else if(month == "May"){
+			return "05";
+		}
+		if(month == "Jun"){
+			return "06";
+		}
+		if(month == "Jul"){
+			return "07";
+		}
+		else if(month == "Aug"){
+			return "08";
+		}
+		else if(month == "Sep"){
+			return "09";
+		}
+		else if(month == "Oct"){
+			return "10";
+		}
+		else if(month == "Nov"){
+			return "11";
+		}
+		else{
+			return "12";
 		}
 	}
 
