@@ -104,6 +104,7 @@ public class informaticsController {
         } else {
             minutesFuckedAround.setText(Integer.toString(1440 - count));
             minutesNotFuckedAround.setText(Integer.toString(count));
+            difference.setText(Integer.toString(Math.abs(Integer.parseInt(minutesFuckedAround.getText()) - Integer.parseInt(minutesNotFuckedAround.getText()))));
             series.getData().add(new XYChart.Data("Fucking around", 1440 - count));
         }
 
