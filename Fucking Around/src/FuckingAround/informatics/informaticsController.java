@@ -12,13 +12,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class informaticsController {
 
-    String [][] activities = new String [50][5];
+    String [][] activities = new String [50][4];
     int activityCount = 0;
 
     @FXML
@@ -30,8 +29,6 @@ public class informaticsController {
     @FXML
     private TextField minutesNotFuckedAround;
 
-    @FXML
-    private TextField difference;
 
     @FXML
     private BarChart<?, ?> weeklyBarChart;
@@ -81,30 +78,18 @@ public class informaticsController {
         todayBarChart.setLegendVisible(false);
         for (int i = 0; i < activityCount; i++) {
             if (activities[i][1].equals(getDate(0))) {
-                if (activities[i][0].equals("Sleep")) {
-                    manualSleep = true;
-                }
-                int diff = getDiff(activities[i][2], activities[i][3]);
-
+                int diff = getDiff(activities[i][2]);
                 series.getData().add(new XYChart.Data(activities[i][0], diff));
                 count += diff;
             }
         }
-
-        if (!manualSleep) {
-            series.getData().add(new XYChart.Data("Sleep", 480));
-            count += 480;
-        }
-
         if (count > 1440) {
             minutesFuckedAround.setText(Integer.toString(0));
             minutesNotFuckedAround.setText(Integer.toString(1440));
-            difference.setText(Integer.toString(1440));
             series.getData().add(new XYChart.Data("Fucking around", 0));
         } else {
             minutesFuckedAround.setText(Integer.toString(1440 - count));
             minutesNotFuckedAround.setText(Integer.toString(count));
-            difference.setText(Integer.toString(Math.abs(Integer.parseInt(minutesFuckedAround.getText()) - Integer.parseInt(minutesNotFuckedAround.getText()))));
             series.getData().add(new XYChart.Data("Fucking around", 1440 - count));
         }
 
@@ -119,25 +104,14 @@ public class informaticsController {
         weeklyBarChart.setLegendVisible(false);
         int[] dayCount = new int[dayOfWeek.getValue()];
         for (int j = dayOfWeek.getValue(); j > 0; j--) {
-            boolean manualSleep = false;
             for (int i = 0; i < activityCount; i++) {
                 if (activities[i][1].equals(getDate(dayOfWeek.getValue()-j))) {
-                    if (activities[i][0].equals("Sleep")) {
-                        manualSleep = true;
-                    }
-                    int diff = getDiff(activities[i][2], activities[i][3]);
+                    int diff = getDiff(activities[i][2]);
                     if (dayCount[j-1] + diff > 1440) {
                         dayCount[j-1] = 1440;
                     } else {
                         dayCount[j-1] += diff;
                     }
-                }
-            }
-            if (!manualSleep) {
-                if (dayCount[j-1] + 480 > 1440) {
-                    dayCount[j-1] = 1440;
-                } else {
-                    dayCount[j - 1] += 480;
                 }
             }
         }
@@ -161,7 +135,6 @@ public class informaticsController {
             sum += 1440 - dayCount[i];
         }
 
-        //System.out.println(1440-dayCount[0]);
         series.getData().add(new XYChart.Data("Monday", 1440 - dayCount[0]));
 
         if (dayOfWeek.getValue() > 1) {
@@ -195,7 +168,7 @@ public class informaticsController {
         }
 
         mostTimeFuckingAround.setText(Integer.toString(1440 - min));
-        fuckingAroundRange.setText(Integer.toString(Integer.parseInt(mostTimeFuckingAround.getText()) + Integer.parseInt(leastTimeFuckingAround.getText())));
+        fuckingAroundRange.setText(Integer.toString(Integer.parseInt(mostTimeFuckingAround.getText()) - Integer.parseInt(leastTimeFuckingAround.getText())));
         fuckingAroundMean.setText(Integer.toString(sum / dayCount.length));
         weeklyBarChart.getData().addAll(series);
 
@@ -245,30 +218,19 @@ public class informaticsController {
         Date oldestDate = format.parse(activities[0][1]);
         long diffInMillies = Math.abs(todayDate.getTime() - oldestDate.getTime());
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        diff = 30;
         XYChart.Series series = new XYChart.Series();
         xyChartOverTime.setLegendVisible(false);
         int[] dayCount = new int[(int) diff+1];
         for (int j = (int) diff+1; j > 0; j--) {
-            boolean manualSleep = false;
             for (int i = 0; i < activityCount; i++) {
                 if (activities[i][1].equals(getDate(j-1))) {
-                    if (activities[i][0].equals("Sleep")) {
-                        manualSleep = true;
-                    }
-                    int difference = getDiff(activities[i][2], activities[i][3]);
+                    int difference = getDiff(activities[i][2]);
                     if (dayCount[j-1] + difference > 1440) {
                         dayCount[j-1] = 1440;
                     } else {
                         dayCount[j-1] += difference;
                     }
-                }
-            }
-
-            if (!manualSleep) {
-                if (dayCount[j-1] + 480 > 1440) {
-                    dayCount[j-1] = 1440;
-                } else {
-                    dayCount[j-1] += 480;
                 }
             }
         }
@@ -317,7 +279,7 @@ public class informaticsController {
                 }
                 str.substring(0, str.length() - 1);
                 String [] splitArray = str.split(" ");
-                for(int j = 0; j < 4; j++){
+                for(int j = 0; j < 3; j++){
                     activities[i][j] = splitArray[j];
                 }
             }
@@ -331,12 +293,12 @@ public class informaticsController {
         }
     }
 
-    int getDiff(String time1, String time2) {
-        int h1 = Integer.parseInt(time1.substring(0,2));
-        int m1 = Integer.parseInt(time1.substring(3,5));
-        int h2 = Integer.parseInt(time2.substring(0,2));
-        int m2 = Integer.parseInt(time2.substring(3,5));
-        return h2 * 60 + m2;
+    int getDiff(String time2) {
+        //int h1 = Integer.parseInt(time1.substring(0,2));
+        //int m1 = Integer.parseInt(time1.substring(3,5));
+        //int h2 = Integer.parseInt(time2.substring(0,2));
+        //int m2 = Integer.parseInt(time2.substring(3,5));
+        return Integer.parseInt(time2);
         /*if (h2 > h1) {
             return (h2 - h1) * 60 + m2 - m1;
         } else if (h1 > h2) {
@@ -372,7 +334,7 @@ public class informaticsController {
 
     @FXML
     void button(String buttonValue) {
-        LocalDate localDate = LocalDate.of(2020, Month.of(4), 15);
+        LocalDate localDate = LocalDate.of(Integer.parseInt(getDate(0).substring(0,4)), Integer.parseInt(getDate(0).substring(5,7)), Integer.parseInt(getDate(0).substring(8,10)));
         DayOfWeek dayOfWeek = DayOfWeek.from(localDate);
         try {
             FileReader fr = new FileReader("Productive.txt");

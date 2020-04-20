@@ -26,7 +26,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class setDataController {
@@ -145,10 +147,9 @@ public class setDataController {
 	}
 
 	@FXML
-	void setActivity(ActionEvent event) {
+	void setActivity(ActionEvent event) throws ParseException {
 		boolean completeEdit = checkForInformationManual();
 		if(completeEdit) {
-			System.out.println("OK");
 			start = hourStartManualDropdown.getValue() + ":" + minuteStartManualDropdown.getValue();
 			end = hourEndManualDropdown.getValue() + ":" + minuteEndManualDropdown.getValue();
 			String Mon = monthDropdown.getValue();
@@ -219,8 +220,23 @@ public class setDataController {
 				timer(true);
 			}
 			else{
-				end = hour + ":" + minute;
-				Dp.addDataPoint(nameField.getText(), format.format(date), start, end);
+
+				if ((Integer.parseInt(start.substring(0,2))+Integer.parseInt(hour))*60 + (Integer.parseInt(start.substring(3,5))+Integer.parseInt(minute))> 1440) {
+					String activity = nameField.getText();
+					Dp.addDataPoint(activity, format.format(date), start, (23 - Integer.parseInt(start.substring(0, 2))) * 60 + (60 - Integer.parseInt(start.substring(3, 5))));
+					DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					Date newDate = date;
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(newDate);
+					cal.add(Calendar.DATE, 1);
+					newDate = cal.getTime();
+					System.out.println(Integer.parseInt(hour) *60 + Integer.parseInt(minute));
+					System.out.println((23 - Integer.parseInt(start.substring(0, 2))) * 60 + (60 - Integer.parseInt(start.substring(3, 5))));
+					Dp.addDataPoint(activity, format.format(newDate), "00:00",
+							Integer.parseInt(hour) *60 + Integer.parseInt(minute) - ((23 - Integer.parseInt(start.substring(0, 2))) * 60 + (60 - Integer.parseInt(start.substring(3, 5)))));
+				} else {
+					Dp.addDataPoint(nameField.getText(), format.format(date), start, Integer.parseInt(hour) *60 + Integer.parseInt(minute));
+				}
 				startButton.setText("Start");
 				nameField.setEditable(true);
 				hourTimerDropdown.setDisable(false);
@@ -319,7 +335,6 @@ public class setDataController {
 				}
 				else{
 					minute = ((minute.charAt(0) + 1) - 48) + "0";
-					System.out.println(minute);
 				}
 			}
 			else{

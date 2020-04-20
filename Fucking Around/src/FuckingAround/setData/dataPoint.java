@@ -1,11 +1,17 @@
 package FuckingAround.setData;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class dataPoint {
     int manualDataCount;
+    private Object point;
 
-    public void manualDurationCalc(String activity, String date, String start, String end){
+    public void manualDurationCalc(String activity, String date, String start, String end) throws ParseException {
         String[] begin = start.split(":");
         String[] End = end.split(":");
         int[] time = new int[2];
@@ -17,25 +23,25 @@ public class dataPoint {
                 time[startEnd] = Integer.parseInt(End[startEnd]) - Integer.parseInt(begin[startEnd]);
             }
         }
-
-        String hour;
-        String minute;
-        if(String.valueOf(time[0]).length() == 1){
-            hour = "0" + String.valueOf(time[0]);
+        int hour;
+        int minute;
+        hour = time[0];
+        minute = time[1];
+        if (Integer.parseInt(start.substring(0,2))*60 + Integer.parseInt(start.substring(3,5)) > Integer.parseInt(end.substring(0,2))*60 + Integer.parseInt(end.substring(3,5))) {
+            addDataPoint(activity, date, start, (23 - Integer.parseInt(start.substring(0, 2))) * 60 + (60 - Integer.parseInt(start.substring(3, 5))));
+            DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            Date newDate = format.parse(date);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(newDate);
+            cal.add(Calendar.DATE, 1);
+            newDate = cal.getTime();
+            addDataPoint(activity, format.format(newDate), "00:00", Integer.parseInt(end.substring(0, 2)) * 60 + Integer.parseInt(end.substring(3, 5)));
+        } else {
+            addDataPoint(activity, date, start, hour*60 + minute);
         }
-        else{
-            hour = String.valueOf(time[0]);
-        }
-        if(String.valueOf(time[1]).length() == 1){
-            minute = "0" + String.valueOf(time[1]);
-        }
-        else{
-            minute = String.valueOf(time[1]);
-        }
-        addDataPoint(activity, date, start, hour + ":" + minute);
     }
 
-    public void addDataPoint(String activity, String date, String start, String end){
+    public void addDataPoint(String activity, String date, String start, int end){
         try {
             FileWriter fw = new FileWriter("RawData.txt", true);
             String convActivity = new String(convertActivity(activity));
@@ -89,7 +95,8 @@ public class dataPoint {
     }
 
     public void setArray(){
-        point[] data = new point[manualDataCount];
+        //point[] data = new point[manualDataCount];
+        point[] data = new point[1000];
         try {
             FileReader readToSort = new FileReader("RawData.txt");
             BufferedReader bReadToSort = new BufferedReader(readToSort);
@@ -100,7 +107,7 @@ public class dataPoint {
                     String[] initialSplit = historyRead.split(" ");
                     String[] dateSplit = initialSplit[1].split("/");
                     String[] timeSplit = initialSplit[2].split(":");
-                    point current = new point(initialSplit[0], Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[2]), Integer.parseInt(timeSplit[0]), Integer.parseInt(timeSplit[1]), initialSplit[3]);
+                    point current = new point(initialSplit[0], Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[2]), Integer.parseInt(timeSplit[0]), Integer.parseInt(timeSplit[1]), Integer.parseInt(initialSplit[3].substring(0, initialSplit[3].length()-1)));
                     data[count-1] = current;
                     count++;
                 }
@@ -113,7 +120,9 @@ public class dataPoint {
             }
             readToSort.close();
             bReadToSort.close();
+            //breakUp(data);
             sort(data);
+            combine(data);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -123,6 +132,27 @@ public class dataPoint {
         }
     }
 
+    /*public void breakUp(point[] data) {
+        for (int i=0; i < manualDataCount; i++) {
+            if (data[i].getHour()<data) {
+
+            }
+        }
+    }*/
+    public void combine(point[] data) {
+        int i = 0;
+        int counter = 0;
+        while (i<manualDataCount) {
+            for (int j=1; j+i<manualDataCount; j++) {
+                if (i < manualDataCount - 1 && data[i].getYear() == data[i + j].getYear() && data[i].getMonth() == data[i + j].getMonth() && data[i].getDay() == data[i + j].getDay() && data[i].getActivity().equals(data[i + j].getActivity())) {
+                    data[i+j].setDuplicate();
+                    data[i].setDuration(data[i+j].getDuration());
+                }
+            }
+            i++;
+        }
+        write(data);
+    }
     public void sort(point[] data) {
         for(int z = 0; z < manualDataCount; z++) {
             for (int i = 0; i < manualDataCount; i++) {
@@ -133,33 +163,35 @@ public class dataPoint {
                 }
             }
         }
-        write(data);
+        //write(data);
     }
 
     public void write(point[] data){
         try {
             FileWriter fw = new FileWriter("sortedData.txt");
             for(int j = 0; j < manualDataCount; j++) {
-                String monthPad = "";
-                String dayPad = "";
-                String hourPad = "";
-                String minutePad = "";
-                if (data[j].getMonth()<10) {
-                    monthPad = "0";
+                if (data[j].getDuplicate() == false) {
+                    String monthPad = "";
+                    String dayPad = "";
+                    String hourPad = "";
+                    String minutePad = "";
+                    if (data[j].getMonth() < 10) {
+                        monthPad = "0";
+                    }
+                    if (data[j].getDay() < 10) {
+                        dayPad = "0";
+                    }
+                    /*if (data[j].getHour() < 10) {
+                        hourPad = "0";
+                    }
+                    if (data[j].getMinute() < 10) {
+                        minutePad = "0";
+                    }*/
+                    if (j > 0) {
+                        fw.write("\n");
+                    }
+                    fw.write(data[j].getActivity() + " " + data[j].getYear() + "/" + monthPad + data[j].getMonth() + "/" + dayPad + data[j].getDay() + " " + data[j].getDuration());
                 }
-                if (data[j].getDay()<10) {
-                    dayPad = "0";
-                }
-                if (data[j].getHour()<10) {
-                    hourPad = "0";
-                }
-                if (data[j].getMinute()<10) {
-                    minutePad = "0";
-                }
-                if (j>0) {
-                    fw.write("\n");
-                }
-                fw.write(data[j].getActivity() + " " + data[j].getYear() + "/" + monthPad + data[j].getMonth() + "/" + dayPad + data[j].getDay() + " " + hourPad + data[j].getHour() + ":" + minutePad + data[j].getMinute() + " " +  data[j].getDuration());
             }
             fw.close();
         }

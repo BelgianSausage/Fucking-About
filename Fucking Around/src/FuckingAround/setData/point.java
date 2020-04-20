@@ -8,9 +8,10 @@ public class point implements Comparable<point> {
     private int Day;
     private int hour;
     private int Minute;
-    private String Duration;
+    private int Duration;
+    private boolean duplicate;
 
-    public point(String activity, int Year, int Month, int Day, int hour, int Minute, String Duration){
+    public point(String activity, int Year, int Month, int Day, int hour, int Minute, int Duration){
         this.activity = activity;
         this.Year = Year;
         this.Month = Month;
@@ -18,6 +19,7 @@ public class point implements Comparable<point> {
         this.hour = hour;
         this.Minute = Minute;
         this.Duration = Duration;
+        duplicate = false;
     }
     public String getActivity(){return activity;}
     public int getYear(){return Year;}
@@ -25,7 +27,16 @@ public class point implements Comparable<point> {
     public int getDay(){return Day;}
     public int getHour(){return hour;}
     public int getMinute(){return Minute;}
-    public String getDuration(){return Duration;}
+    public int getDuration(){return Duration;}
+    public boolean getDuplicate(){return duplicate;}
+
+    void setDuplicate() {
+        duplicate = true;
+    }
+
+    void setDuration(int dur) {
+        Duration += dur;
+    }
 
     @Override
     public int compareTo(point point) {
