@@ -29,7 +29,6 @@ public class informaticsController {
     @FXML
     private TextField minutesNotFuckedAround;
 
-
     @FXML
     private BarChart<?, ?> weeklyBarChart;
 
@@ -213,12 +212,12 @@ public class informaticsController {
 
     @FXML
     void allTime() throws ParseException {
-        DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        Date todayDate = new Date();
-        Date oldestDate = format.parse(activities[0][1]);
-        long diffInMillies = Math.abs(todayDate.getTime() - oldestDate.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-        diff = 30;
+        //DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        //Date todayDate = new Date();
+        //Date oldestDate = format.parse(activities[0][1]);
+        //long diffInMillies = Math.abs(todayDate.getTime() - oldestDate.getTime());
+        //long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        int diff = 30;
         XYChart.Series series = new XYChart.Series();
         xyChartOverTime.setLegendVisible(false);
         int[] dayCount = new int[(int) diff+1];
