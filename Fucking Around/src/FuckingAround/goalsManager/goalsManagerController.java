@@ -55,6 +55,15 @@ public class goalsManagerController {
 
 	@FXML
 	private Button backButton;
+	
+	@FXML
+	private Button alphabeticalSortButton;
+	
+	@FXML
+	private Button completionSortButton;
+	
+	@FXML
+	private Button minutesSpentButton;
 
 	@FXML
 	void deleteGoal(){
@@ -129,6 +138,74 @@ public class goalsManagerController {
 		}
 	}
 
+	@FXML
+	void alphabeticalSort() {
+		for(int i = 0; i < goalCount; i++) {
+			for(int j = 0; j < goalCount; j++) {
+                if (goals[j][0].toUpperCase().compareTo(goals[i][0].toUpperCase())>0){
+                    swapper(i,j);
+                }
+            }
+        }
+		showSort();
+	}
+	
+	@FXML
+	void completionSort() {
+		for (int i = 0; i < goalCount; i++){
+            for (int j = 0; j < goalCount; j++){
+                if (Double.parseDouble(goals[i][4]) > Double.parseDouble(goals[j][4])){
+                    swapper(i,j);
+                }
+            }
+        }
+		showSort();
+	}
+	
+	@FXML
+	void minutesSpentSort() {
+		for (int i = 0; i < goalCount; i++){
+            for (int j = 0; j < goalCount; j++){
+                if (1==1){  //THIS MUST BE SWAPPED WITH MINUTES SPENT CONDITION
+                    swapper(i,j);
+                }
+            }
+        }
+		showSort();
+	}
+	
+	void showSort() {
+		goalsObvList.clear();
+		for(int i = 0; i < goalCount; i++){
+			goalsObvList.add(goals[i][0]);
+		}
+		goalSelected = 0;
+		updateGoalInformation(goalSelected);
+	}
+	
+	void swapper(int i, int j) {
+		String temp0;
+		String temp1;
+		String temp2;
+		String temp3;
+		String temp4;
+		temp0 = goals[i][0];
+		temp1 = goals[i][1];
+		temp2 = goals[i][2];
+		temp3 = goals[i][3];
+		temp4 = goals[i][4];
+        goals[i][0] = goals[j][0];
+        goals[i][1] = goals[j][1];
+        goals[i][2] = goals[j][2];
+        goals[i][3] = goals[j][3];
+        goals[i][4] = goals[j][4];
+        goals[j][0] = temp0;
+        goals[j][1] = temp1;
+        goals[j][2] = temp2;
+        goals[j][3] = temp3;
+        goals[j][4] = temp4;
+	}
+	
 	void readGoals(){
 		try {
 			FileReader fr = new FileReader("Goals.txt");

@@ -9,7 +9,6 @@ import java.util.Date;
 
 public class dataPoint {
     int manualDataCount;
-    private Object point;
 
     public void manualDurationCalc(String activity, String date, String start, String end) throws ParseException {
         String[] begin = start.split(":");
@@ -84,6 +83,7 @@ public class dataPoint {
                     break;
                 }
             }
+            br.close();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -141,7 +141,6 @@ public class dataPoint {
     }*/
     public void combine(point[] data) {
         int i = 0;
-        int counter = 0;
         while (i<manualDataCount) {
             for (int j=1; j+i<manualDataCount; j++) {
                 if (i < manualDataCount - 1 && data[i].getYear() == data[i + j].getYear() && data[i].getMonth() == data[i + j].getMonth() && data[i].getDay() == data[i + j].getDay() && data[i].getActivity().equals(data[i + j].getActivity())) {
@@ -173,8 +172,6 @@ public class dataPoint {
                 if (data[j].getDuplicate() == false) {
                     String monthPad = "";
                     String dayPad = "";
-                    String hourPad = "";
-                    String minutePad = "";
                     if (data[j].getMonth() < 10) {
                         monthPad = "0";
                     }

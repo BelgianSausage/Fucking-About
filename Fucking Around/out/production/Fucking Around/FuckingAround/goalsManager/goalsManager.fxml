@@ -18,7 +18,43 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ListView fx:id="goalList" onMouseClicked="#displaySelectedGoal" prefHeight="598.0" prefWidth="266.0" style="-fx-background-color: #ededeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <SplitPane dividerPositions="0.7248322147651006" orientation="VERTICAL" prefHeight="598.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <ListView fx:id="goalList" onMouseClicked="#displaySelectedGoal" prefHeight="429.0" prefWidth="264.0" style="-fx-background-color: #ededeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Button fx:id="alphabeticalSortButton" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onAction="#alphabeticalSort" prefHeight="35.0" prefWidth="245.0" text="Sort Alphabetically">
+                                 <font>
+                                    <Font name="Calisto MT" size="20.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow color="#d6d3d3" />
+                                 </effect>
+                              </Button>
+                              <Button fx:id="completionSortButton" layoutX="10.0" layoutY="62.0" mnemonicParsing="false" onAction="#completionSort" prefHeight="35.0" prefWidth="245.0" text="Sort by Completion">
+                                 <font>
+                                    <Font name="Calisto MT" size="20.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow color="#d6d3d3" />
+                                 </effect>
+                              </Button>
+                              <Button fx:id="minutesSpentButton" layoutX="10.0" layoutY="109.0" mnemonicParsing="false" onAction="#minutesSpentSort" prefHeight="35.0" prefWidth="245.0" text="Sort by Minutes Spent">
+                                 <font>
+                                    <Font name="Calisto MT" size="20.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow color="#d6d3d3" />
+                                 </effect>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

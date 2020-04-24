@@ -69,11 +69,12 @@ public class informaticsController {
         allTime();
     }
 
-    @FXML
+    @SuppressWarnings("unchecked")
+	@FXML
     void today() {
         int count = 0;
         boolean manualSleep = false;
-        XYChart.Series series = new XYChart.Series();
+		XYChart.Series series = new XYChart.Series();
         todayBarChart.setLegendVisible(false);
         for (int i = 0; i < activityCount; i++) {
             if (activities[i][1].equals(getDate(0))) {
