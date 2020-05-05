@@ -45,11 +45,19 @@ public class editGoalsController extends goalsManagerController{
 
     @FXML
     private Button editGoalButton;
+    
+    @FXML
+    private TextField goalMinutesField;
+    
+    @FXML
+    private TextField goalDaysField;
 
     @FXML
     void dailyGoal(ActionEvent event) {
     	dailyCheckbox.setSelected(true);
     	weeklyCheckbox.setSelected(false);
+    	goalDaysField.setEditable(false);
+		goalMinutesField.setEditable(true);
     	goalTimescope = 0;
     }
 
@@ -81,6 +89,8 @@ public class editGoalsController extends goalsManagerController{
     void weeklyGoal(ActionEvent event) {
     	dailyCheckbox.setSelected(false);
     	weeklyCheckbox.setSelected(true);
+    	goalDaysField.setEditable(true);
+		goalMinutesField.setEditable(false);
     	goalTimescope = 1;
     }
 

@@ -44,6 +44,12 @@ public class addGoalsController{
 
 	@FXML
 	private TextField goalRewardField;
+	
+	@FXML
+	private TextField goalMinutesField;
+	
+	@FXML
+	private TextField goalDaysField;
 
 	@FXML
 	void addGoal(ActionEvent event) {
@@ -72,6 +78,8 @@ public class addGoalsController{
 	void dailyGoal(){
 		dailyCheckbox.setSelected(true);
 		weeklyCheckbox.setSelected(false);
+		goalDaysField.setEditable(false);
+		goalMinutesField.setEditable(true);
 		goalTimescope = 0;
 	}
 
@@ -79,6 +87,8 @@ public class addGoalsController{
 	void weeklyGoal(){
 		dailyCheckbox.setSelected(false);
 		weeklyCheckbox.setSelected(true);
+		goalDaysField.setEditable(true);
+		goalMinutesField.setEditable(false);
 		goalTimescope = 1;
 	}
 

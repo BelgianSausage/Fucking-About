@@ -64,6 +64,9 @@ public class goalsManagerController {
 	
 	@FXML
 	private Button minutesSpentButton;
+	
+	@FXML
+	private TextField timeField;
 
 	@FXML
 	void deleteGoal(){

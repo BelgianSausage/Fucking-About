@@ -67,17 +67,17 @@
                                  <font>
                                     <Font size="14.0" />
                                  </font></Label>
-                              <CheckBox fx:id="weeklyTickBox" layoutX="108.0" layoutY="337.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" text="Weekly">
+                              <CheckBox fx:id="weeklyTickBox" layoutX="71.0" layoutY="282.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" text="Weekly">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </CheckBox>
-                              <CheckBox fx:id="dailyTickBox" layoutX="108.0" layoutY="278.0" mnemonicParsing="false" text="Daily">
+                              <CheckBox fx:id="dailyTickBox" layoutX="70.0" layoutY="247.0" mnemonicParsing="false" text="Daily">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </CheckBox>
-                              <Text layoutX="76.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timepsan of goal:">
+                              <Text layoutX="39.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timepsan of goal:">
                                  <font>
                                     <Font name="Calisto MT" size="18.0" />
                                  </font>
@@ -99,6 +99,11 @@
                               </Text>
                               <ProgressIndicator fx:id="percentageCompletionDisk" layoutX="404.0" layoutY="247.0" minHeight="150.0" minWidth="150.0" prefHeight="97.0" prefWidth="30.0" progress="0.0" />
                               <TextField fx:id="rewardField" editable="false" layoutX="215.0" layoutY="136.0" prefHeight="49.0" prefWidth="175.0" style="-fx-background-radius: 100;">
+                                 <font>
+                                    <Font name="Calisto MT" size="27.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="timeField" editable="false" layoutX="19.0" layoutY="335.0" prefHeight="49.0" prefWidth="175.0" style="-fx-background-radius: 100;">
                                  <font>
                                     <Font name="Calisto MT" size="27.0" />
                                  </font>
