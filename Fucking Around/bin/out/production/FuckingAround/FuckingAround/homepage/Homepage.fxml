@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ededeb;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FuckingAround.homepage.HomepageController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ededeb;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FkingAround.homepage.HomepageController">
    <children>
       <Button fx:id="helpButton" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToMainHelpPage" style="-fx-background-radius: 100;" text="?">
          <effect>

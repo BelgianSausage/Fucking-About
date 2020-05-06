@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ededeb;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FkingAround.homepage.HomepageController">
+   <children>
+      <Button fx:id="helpButton" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToMainHelpPage" style="-fx-background-radius: 100;" text="?">
+         <effect>
+            <DropShadow color="#3061ff" height="10.0" offsetY="-0.05" radius="7.25" />
+         </effect></Button>
+      <Button fx:id="editActivityButton" layoutX="47.0" layoutY="352.0" mnemonicParsing="false" onAction="#goToSetData" prefHeight="60.0" prefWidth="806.0" text="      Edit &#10;Activity Data&#10;" AnchorPane.leftAnchor="47.0">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="19.0" />
+         </font>
+         <effect>
+            <DropShadow color="#bfa9a9" />
+         </effect>
+      </Button>
+      <Button fx:id="personalInformaticsButton" layoutX="47.0" layoutY="431.0" mnemonicParsing="false" onAction="#goToInformatics" prefHeight="60.0" prefWidth="806.0" text=" View F**king&#10;Around Habbits">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="19.0" />
+         </font>
+         <effect>
+            <DropShadow color="#bfa9a9" />
+         </effect>
+      </Button>
+      <Button fx:id="goalsManagerButton" layoutX="47.0" layoutY="510.0" mnemonicParsing="false" onAction="#goToGoalsManager" prefHeight="60.0" prefWidth="806.0" text="Goals Manager&#10;" AnchorPane.rightAnchor="47.0">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="19.0" />
+         </font>
+         <effect>
+            <DropShadow color="#bfa9a9" />
+         </effect>
+      </Button>
+      <ImageView fitHeight="295.0" fitWidth="431.0" layoutX="314.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/Logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
